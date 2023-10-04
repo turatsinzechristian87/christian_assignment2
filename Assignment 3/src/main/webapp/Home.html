@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Admission Page</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        nav {
+            background-color: #444;
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        section {
+            display: none;
+            padding: 20px;
+            text-align: center;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+
+<body bgcolor="gray">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div class="home-container">
+		<div class="banner">
+        <div class="navbar">
+            <ul>
+                <li id="logi"><a href="index.html">Login</a></li>
+                <li id="reg"><a href="Signup.html">Register</a></li>
+            </ul>
+        </div>
+        <h1>Student Admission Page</h1>
+      
+        
+    </div>
+    
+    <div class="accept-container">
+        <h1>Upload Required Documents</h1>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+  <label for="passportPhoto">Upload Passport Photo (JPG or PNG):</label>
+  <input type="file" name="passportPhoto" id="passportPhoto" accept=".jpg, .png">
+  
+  <label for="certificates">Upload Certificates (PDF only):</label>
+  <input type="file" name="certificates" id="certificates" accept=".pdf">
+  
+  <input type="submit" value="Upload Files" name="submit">
+   <form action="sendConfirmationEmail" method="POST">
+        <input type="text" name="recipientEmail" placeholder="Recipient's Email" required>
+        <input type="text" name="confirmationCode" placeholder="Confirmation Code" required>
+        <input type="submit" value="Send Confirmation Email" id="button">
+</form>
+<!-- Language Selection -->
+    <label for="language-select">Select Language:</label>
+    <select id="language-select">
+        <option value="en">English</option>
+        <option value="es">Espanol</option>
+        <option value="fr">Francais</option>
+    </select>
+</div>
+<!-- Language-specific Content -->
+    <div id="language-content">
+        <h2 id="language-title">Student Admission Foam</h2>
+        <p id="language-instructions">Please fill out the form below:</p>
+    </div>
+
+    <script>
+        const form = document.getElementById("admission-form");
+        const languageSelect = document.getElementById("language-select");
+        const languageContent = document.getElementById("language-content");
+        const languageTitle = document.getElementById("language-title");
+        const languageInstructions = document.getElementById("language-instructions");
+
+        // Language-specific text
+        const languages = {
+            en: {
+                title: "Short Notice",
+                instructions: "Please make sure that you provide all required documents above:"
+            },
+            es: {
+                title: "Avis de courte durée",
+                instructions: "Asegúrese de proporcionar todos los documentos requeridos anteriormente:"
+            },
+            fr: {
+                title: "Aviso breve",
+                instructions: "Veillez à fournir tous les documents requis ci-dessus. :"
+            }
+        };
+
+        // Function to update language-specific content
+        function updateLanguage() {
+            const selectedLanguage = languageSelect.value;
+            const selectedText = languages[selectedLanguage];
+
+            languageTitle.textContent = selectedText.title;
+            languageInstructions.textContent = selectedText.instructions;
+        }
+
+        // Initial language update
+        updateLanguage();
+
+        // Event listener for language selection change
+        languageSelect.addEventListener("change", updateLanguage);
+
+        // Event listener for form submission (you can add server-side processing here)
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            // Collect and process form data here
+        });
+    </script>
+</body>
+</html>
+
